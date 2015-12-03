@@ -55,5 +55,5 @@ time(Metric, Fun) when is_function(Fun) ->
     {Micros, Result} = timer:tc(Fun),
     Millis = Micros/1000,
     folsom_metrics:notify(<<Metric/binary, ".rate">>, 1, meter),
-    folsom_metrics:notify(<<Metric/binary, ".duration">>, Millis, histogram),
+    folsom_metrics:notify(<<Metric/binary, ".duration">>, Millis, {histogram, slide}),
     Result.
